@@ -9,8 +9,10 @@
 #include "task.h"
 #include "esp8266.h"
 
+#include "global.c"
 #include "ssd1306_simple.c"
 #include "sntp.c"
+#include "httpget.c"
 
 const int gpio = 2;
 
@@ -29,9 +31,6 @@ void blinkenTask(void *pvParameters)
     }
 }
 
-
-
-
 void user_init(void)
 {
     uart_set_baud(0, 115200);
@@ -49,6 +48,7 @@ void user_init(void)
 
     ssd1306_start();
     sntp_start();
+    httpget_start();
 
     xTaskCreate(blinkenTask, "blinkenTask", 256, NULL, 2, NULL);
 }

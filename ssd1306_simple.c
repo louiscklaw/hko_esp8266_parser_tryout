@@ -1,16 +1,21 @@
+
+#include <string.h>
+
+
 #include <espressif/esp_common.h>
 #include <esp/uart.h>
 #include <FreeRTOS.h>
 #include <task.h>
 #include <queue.h>
 #include <timers.h>
-#include <string.h>
 #include <ssd1306/ssd1306.h>
 
 #include <i2c/i2c.h>
 
 #include "global.c"
 extern char* current_time;
+extern char str_hko_temp[2];
+extern char str_hko_humid[2];
 
 #include "fonts/fonts.h"
 const font_info_t *font = NULL; // current font
@@ -55,10 +60,13 @@ void ssd1306_task(void * pvParameters)
     {
         font = font_builtin_fonts[0];
 
-
         ssd1306_fill_rectangle(&dev, buffer, 0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT/2, OLED_COLOR_BLACK);
 
         ssd1306_draw_string(&dev, buffer, font, 0, 0, current_time, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+
+        ssd1306_draw_string(&dev, buffer, font, 0, 35, str_hko_temp, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+
+        ssd1306_draw_string(&dev, buffer, font, 0, 45, str_hko_humid, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 
         ssd1306_load_frame_buffer(&dev, buffer);
 
