@@ -10,6 +10,7 @@
 #include "esp8266.h"
 
 #include "ssd1306_simple.c"
+#include "sntp.c"
 
 const int gpio = 2;
 
@@ -29,10 +30,25 @@ void blinkenTask(void *pvParameters)
 }
 
 
+
+
 void user_init(void)
 {
     uart_set_baud(0, 115200);
 
+
+    struct sdk_station_config config = {
+        .ssid = WIFI_SSID,
+        .password = WIFI_PASS,
+    };
+
+    /* required to call wifi_set_opmode before station_set_config */
+    sdk_wifi_set_opmode(STATION_MODE);
+    sdk_wifi_station_set_config(&config);
+
+
     ssd1306_start();
+    sntp_start();
+
     xTaskCreate(blinkenTask, "blinkenTask", 256, NULL, 2, NULL);
 }

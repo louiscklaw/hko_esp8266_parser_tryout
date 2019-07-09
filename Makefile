@@ -1,6 +1,6 @@
 PROGRAM=blink
 
-EXTRA_COMPONENTS = extras/ssd1306 extras/i2c extras/fonts
+EXTRA_COMPONENTS = extras/ssd1306 extras/i2c extras/fonts extras/sntp
 
 FONTS_GLCD_5X7 = 1
 FONTS_BITOCRA_4X7 = 1

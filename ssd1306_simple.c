@@ -9,6 +9,9 @@
 
 #include <i2c/i2c.h>
 
+#include "global.c"
+extern char* current_time;
+
 #include "fonts/fonts.h"
 const font_info_t *font = NULL; // current font
 font_face_t font_face = 0;
@@ -46,6 +49,8 @@ void ssd1306_task(void * pvParameters)
 
     ssd1306_set_whole_display_lighting(&dev, false);
 
+    int i =0;
+
     while(1)
     {
         font = font_builtin_fonts[0];
@@ -53,11 +58,16 @@ void ssd1306_task(void * pvParameters)
 
         ssd1306_fill_rectangle(&dev, buffer, 0, 0, DISPLAY_WIDTH, DISPLAY_HEIGHT/2, OLED_COLOR_BLACK);
 
-        ssd1306_draw_string(&dev, buffer, font, 0, 0, "Hello, esp-open-rtos!", OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+        ssd1306_draw_string(&dev, buffer, font, 0, 0, current_time, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 
         ssd1306_load_frame_buffer(&dev, buffer);
 
-        printf("ssd1306 running \n");
+        if (i > 10){
+            i = 0;
+            printf("ssd1306 running \n");
+        }
+        i=i+1;
+
         vTaskDelay(10/portTICK_PERIOD_MS);
     }
 }
