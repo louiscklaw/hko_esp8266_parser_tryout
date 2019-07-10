@@ -29,6 +29,15 @@ extern char str_hko_humid[2];
 #define WEB_PORT "80"
 #define WEB_PATH "/rss/CurrentWeather.xml"
 
+void extractDistrictWeather(char str_input[])
+{
+    getTemperatureByDistrict(str_input, str_ws_hong_kong_observatory, STR_HONG_KONG_OBSERVATORY, "99");
+    getTemperatureByDistrict(str_input, str_ws_kings_park, STR_KINGS_PARK, "99");
+    getTemperatureByDistrict(str_input, str_ws_kwun_tong, STR_KWUN_TONG, "99");
+
+
+}
+
 void http_get_task(void *pvParameters)
 {
     printf("http_get_task:start");
@@ -124,6 +133,8 @@ void http_get_task(void *pvParameters)
 
         getLastUpdate(rss_buffer, str_last_update);
         printf("last update:'%s'\n", str_last_update);
+
+        extractDistrictWeather(rss_buffer);
 
         for(int i=11;i>1;i--)
         {

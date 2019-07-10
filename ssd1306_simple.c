@@ -70,6 +70,13 @@ void ssd1306_task(void * pvParameters)
 
         ssd1306_draw_string(&dev, buffer, font, 0, 55, str_last_update, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 
+        // district weather
+        ssd1306_draw_string(&dev, buffer, font, 15, 35, str_ws_hong_kong_observatory, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+
+        ssd1306_draw_string(&dev, buffer, font, 30, 35, str_ws_kings_park, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+
+        ssd1306_draw_string(&dev, buffer, font, 45, 35, str_ws_kwun_tong, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+
         ssd1306_load_frame_buffer(&dev, buffer);
 
         if (i > 10){

@@ -51,14 +51,32 @@ void fixIf1Digit(char str_input[], char str_output[])
 {
     char* pch;
     str_output[0]='\0';
+    strcpy(str_output, str_input);
 
-    pch = strchr(str_input, ' ');
-    if (pch != NULL){
-        printf("single digit found");
-        strncpy(str_output, str_input, 1);
-        str_output[1]='\0';
+    pch = strchr(str_output, ' ');
+    if (pch==NULL)
+    {
+        printf("2 digit\n");
     }else{
-        printf("2 digit found");
-        strcpy(str_output, str_input);
+        printf("1 digit\n");
+        str_output[1]='\0';
+    }
+}
+
+void getTemperatureByDistrict(char str_input[], char str_output[], char district[], char last_know_good_value[])
+{
+    str_output[0]='\0';
+
+    char* pch;
+    char formatted_district[20];
+    sprintf(formatted_district, ">%s<", district);
+    int len_formatted_district = strlen(formatted_district);
+
+    pch = strstr(str_input, formatted_district);
+    if (pch==NULL)
+    {
+        strcpy(str_output, last_know_good_value);
+    }else{
+        strncpy(str_output, pch+len_formatted_district+57,2);
     }
 }
