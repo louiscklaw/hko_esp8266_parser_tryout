@@ -12,5 +12,6 @@
 
     char str_hko_temp[2];
     char str_hko_humid[2];
+    char str_last_update[30];
 
 #endif

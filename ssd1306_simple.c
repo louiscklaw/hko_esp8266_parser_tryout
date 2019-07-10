@@ -68,6 +68,8 @@ void ssd1306_task(void * pvParameters)
 
         ssd1306_draw_string(&dev, buffer, font, 0, 45, str_hko_humid, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
 
+        ssd1306_draw_string(&dev, buffer, font, 0, 55, str_last_update, OLED_COLOR_WHITE, OLED_COLOR_BLACK);
+
         ssd1306_load_frame_buffer(&dev, buffer);
 
         if (i > 10){

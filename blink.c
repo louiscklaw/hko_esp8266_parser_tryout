@@ -23,7 +23,7 @@ void blinkenTask(void *pvParameters)
 {
     gpio_enable(gpio, GPIO_OUTPUT);
     while(1) {
-        printf("helloworld\r\n");
+        printf("blink:helloworld\r\n");
         gpio_write(gpio, 1);
         vTaskDelay(500 / portTICK_PERIOD_MS);
         gpio_write(gpio, 0);

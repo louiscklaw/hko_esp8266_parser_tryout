@@ -113,12 +113,21 @@ void http_get_task(void *pvParameters)
 
         close(s);
 
-        getAirTemperature_2_digit(currentweather_xml, str_hko_temp);
-        getHumidityTemperature_2_digit(currentweather_xml, str_hko_humid);
+        char str_temp1[10];
+        getAirTemperature_2_digit(rss_buffer, str_hko_temp);
+        fixIf1Digit(str_hko_temp,str_temp1);
+        printf("temperature:'%s'\n", str_temp1);
 
-        for(int i=0;i<11;i++)
+        getHumidityTemperature_2_digit(rss_buffer, str_hko_humid);
+        fixIf1Digit(str_hko_humid,str_temp1);
+        printf("humidity:'%s'\n", str_temp1);
+
+        getLastUpdate(rss_buffer, str_last_update);
+        printf("last update:'%s'\n", str_last_update);
+
+        for(int i=11;i>1;i--)
         {
-            printf("countdown->%d", i);
+            printf("countdown to refresh->%d\n", i);
             vTaskDelay(1000/portTICK_PERIOD_MS);
         }
 

@@ -1,3 +1,11 @@
+
+char* air_temp_2_digit="Air temperature : 29 degrees Celsius";
+char* air_temp_1_digit="Air temperature : 3 degrees Celsius";
+
+char* humid_2_digit="Relative Humidity : 82 per cent";
+char* humid_1_digit="Relative Humidity : 8 per cent";
+
+
 char* currentweather_xml =
 "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
 "<?xml-stylesheet href=\"current.xsl\" type=\"text/xsl\" ?>\n"
